@@ -10,4 +10,11 @@ class Solution:
         :type node: ListNode
         :rtype: void Do not return anything, modify node in-place instead.
         """
+        while node.next is not None:
+            next_node = node.next
+            node.val = next_node.val
+            if next_node.next is None:
+                node.next = None
+            else:
+                node = next_node
         
