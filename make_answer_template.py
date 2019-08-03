@@ -8,7 +8,7 @@ def main(q_no, q_title, method_signature):
     os.mkdir(answer_dir)
 
     with open(os.path.join(answer_dir, answer_file), 'w') as f:
-        content = """
+        content = """#!/bin/env python
 class Solution:
     def {}:
         pass
@@ -17,7 +17,7 @@ class Solution:
 
 
     with open(os.path.join(answer_dir, 'test_{}'.format(answer_file)), 'w') as f:
-        content = """
+        content = """#!/bin/env python
 import pytest
 from {} import Solution
 
