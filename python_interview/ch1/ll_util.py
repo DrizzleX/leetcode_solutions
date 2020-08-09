@@ -3,6 +3,7 @@ class LNode:
         self.data = x
         self.next = None
 
+
 def build_ll(vals):
     head = None
     prev = None
@@ -15,11 +16,13 @@ def build_ll(vals):
         else:
             prev.next = node
         prev = node
-
     return head
 
-def print_ll(head):
+
+def print_ll(head, message=None, **kwargs):
     n = head
+    if message:
+        print(message, **kwargs)
     while n.next is not None:
         print('{}->'.format(n.data), end='')
         n = n.next
