@@ -21,6 +21,9 @@ def build_ll(vals):
 
 def print_ll(head, message=None, **kwargs):
     n = head
+    if n is None:
+        print('Linked list is empty')
+        return
     if message:
         print(message, **kwargs)
     while n.next is not None:
