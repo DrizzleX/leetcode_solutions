@@ -6,6 +6,7 @@ class ListNode:
     def __str__(self):
         return str(self.val)
 
+
 def make_linked_list(vals):
     """
     Make a singly linked list and return the head
@@ -48,6 +49,7 @@ def print_linked_list(linked_list):
         else:
             print(head_node, end='\n')
         head_node = head_node.next
+
 
 def linked_list_as_list(linked_list):
     """
