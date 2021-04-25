@@ -1,23 +1,27 @@
 import sys, os
 from enum import Enum, auto
+from os.path import dirname, abspath, join
+import argparse
 
 
 class DataStructure(Enum):
-    List = auto()
-    LinkedList = auto()
+    LIST = 'list'
+    LINKEDLIST = 'linkedlist'
 
 def main(q_no, q_title, method_signature, data_structures=None):
     if data_structures == None:
         data_structures = []
-    answer_dir = '{}_{}'.format(q_no, q_title)
+    par_dir = abspath(dirname(__file__))
+
+    answer_dir = join(par_dir, f'{q_no}_{q_title}')
     answer_file = '{}.py'.format(q_title)
     try:
         os.mkdir(answer_dir)
     except FileExistsError:
         pass
     data_structure_to_imports = {
-        DataStructure.List: 'from typing import List',
-        DataStructure.LinkedList: 'from singly_linked_list import ListNode, make_linked_list, print_linked_list, linked_list_as_list'
+        DataStructure.LIST: 'from typing import List',
+        DataStructure.LINKEDLIST: 'from singly_linked_list import ListNode, make_linked_list, print_linked_list, linked_list_as_list'
     }
     data_structure_imports = '\n'.join([data_structure_to_imports[ds] for ds in data_structures])
 
@@ -43,14 +47,22 @@ def test_solution():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print('Usage: {} question_title method_signature'.format(sys.argv[0]))
+    parser = argparse.ArgumentParser(description='Generate Leetcode answer template')
+    parser.add_argument('question_title', help='The full title of the question')
+    parser.add_argument('method_signature', help='The signature of the method (without def keyword)')
+    parser.add_argument('--data-structures', help='Avaialble data structures: list, linkedlist')
+    args = parser.parse_args()
 
-    original_title = sys.argv[1]
-    method_signature = sys.argv[2]
+
+    original_title = args.question_title
+    method_signature = args.method_signature
+    if args.data_structures:
+        data_structures = [DataStructure(each) for each in args.data_structures.split(',')]
+    else:
+        data_structures = []
 
     original_title_array = original_title.split('. ')
-
     q_no = original_title_array[0]
     q_title = original_title_array[1].lower().replace(' ', '_')
-    main(q_no, q_title, method_signature, [DataStructure.List, DataStructure.LinkedList])
+
+    main(q_no, q_title, method_signature, data_structures)
