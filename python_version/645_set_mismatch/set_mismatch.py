@@ -16,8 +16,18 @@ class Solution:
             elif occurance == 0:
                 result['missing'] = num
         return [result['duplicate'], result['missing']]
-        
-
+    
+    def findErrorNumsSingleLoop(self, nums: List[int]) -> List[int]:
+        # O(N), O(N)
+        num_occurance = {}
+        for num in nums:
+            num_occurance.setdefault(num, 0)
+            num_occurance[num] += 1
+            if num_occurance[num] == 2:
+                duplicate = num
+                break
+        missing = sum(range(1, len(nums)+1)) - sum(nums) + duplicate
+        return [duplicate, missing]
 
 
 test_data_set = [
@@ -33,5 +43,5 @@ test_data_set = [
 @pytest.mark.parametrize('nums, expected', test_data_set)
 def test_solution(nums, expected):
     solution = Solution()
-    assert solution.findErrorNums(nums) == expected
+    assert solution.findErrorNumsSingleLoop(nums) == expected
         
