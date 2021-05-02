@@ -48,7 +48,9 @@ def test_solution():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate Leetcode answer template')
+    # e.g. 9. Palindrome Number
     parser.add_argument('question_title', help='The full title of the question')
+    # e.g. isPalindrome(self, x: int) -> bool
     parser.add_argument('method_signature', help='The signature of the method (without def keyword)')
     parser.add_argument('--data-structures', help='Avaialble data structures: list, linkedlist')
     args = parser.parse_args()
