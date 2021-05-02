@@ -9,7 +9,7 @@ class Solution:
                 result ^= num
         return result
 
-    def singleNumber_record_occurance(self, nums: List[int]) -> int:
+    def singleNumberRecordOccurance(self, nums: List[int]) -> int:
         """
         Record how many times each element occurs, then go over that dict to find
         the one which only occurs once
@@ -23,3 +23,16 @@ class Solution:
             if result[each] == 1:
                 return each
         return -1
+
+
+test_data_set = [
+    ([1, 1, 2], 2),
+    ([1, 1, 4, 4, 3, 5, 3], 5),
+    ([4, 1, 2, 1, 2], 4),
+]
+
+@pytest.mark.parametrize("nums, expected", test_data_set)
+def test_solution(nums, expected):
+    solution = Solution()
+    assert solution.singleNumber(nums) == expected
+
