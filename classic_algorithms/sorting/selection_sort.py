@@ -10,11 +10,14 @@ def selection_sort(lst):
 
 
 def main():
-    lst = [7, 2, 4, 1, 2, 1, 2, 3, 4, 5, 6, 7]
-    sorted_lst = sorted(lst)
-    assert selection_sort(lst) == sorted_lst
-    lst = [1]
-    assert selection_sort(lst) == [1]
+    lists = [
+        ([], []),
+        ([3], [3]),
+        ([3, 1, 2], [1, 2, 3]),
+        ([3, 1, 2, 3, 4, 1, 2, 34], [1, 1, 2, 2, 3, 3, 4, 34]),
+    ]
+    for each in lists:
+        assert selection_sort(each[0]) == each[1]
 
 
 if __name__ == '__main__':
